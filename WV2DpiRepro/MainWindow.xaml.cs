@@ -21,8 +21,9 @@ namespace WV2DpiRepro
 
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var sdkVer = typeof(CoreWebView2Environment).Assembly.GetName().Version;
-            Log($"=== WV2DpiRepro  SDK {sdkVer}  PID {System.Diagnostics.Process.GetCurrentProcess().Id} ===");
+            var sdkVer     = typeof(CoreWebView2Environment).Assembly.GetName().Version;
+            var runtimeVer = CoreWebView2Environment.GetAvailableBrowserVersionString();
+            Log($"=== WV2DpiRepro  SDK {sdkVer}  runtime {runtimeVer}  PID {System.Diagnostics.Process.GetCurrentProcess().Id} ===");
             Log($"Log file → {_logPath}");
             Log("Start at 100 % scale, open WebView2, change to 150 %, close & reopen, then click cells.");
         }
