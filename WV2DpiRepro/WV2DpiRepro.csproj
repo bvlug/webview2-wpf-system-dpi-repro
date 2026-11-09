@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!-- Must stay net472 / x86 to match H3 and reproduce the System-DPI latch -->
+    <TargetFramework>net472</TargetFramework>
+    <UseWpf>true</UseWpf>
+    <PlatformTarget>x86</PlatformTarget>
+    <Nullable>disable</Nullable>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>WV2DpiRepro</AssemblyName>
+    <RootNamespace>WV2DpiRepro</RootNamespace>
+    <!-- Explicit System-DPI-aware manifest — do NOT add PerMonitorV2 or the bug disappears -->
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Pin to H3's version; if NuGet cannot find it, use the latest stable and note the version. -->
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- System.Drawing is needed for System.Drawing.Rectangle used by CoreWebView2Controller.Bounds -->
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+
+</Project>
